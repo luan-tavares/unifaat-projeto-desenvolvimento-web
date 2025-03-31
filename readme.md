@@ -6,12 +6,12 @@ Siga os passos abaixo para baixar e rodar o projeto localmente:
 
 ### 1. Clonar o repositório
 ```sh
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/luan-tavares/unifaat-projeto-desenvolvimento-web
 ```
 
 ### 2. Entrar na pasta do projeto
 ```sh
-cd seu-repositorio
+cd unifaat-projeto-desenvolvimento-web
 ```
 
 ### 3. Instalar as dependências
