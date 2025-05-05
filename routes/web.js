@@ -37,11 +37,16 @@ router.get('/', (req, res) => {
     });
 });
 
+
+/** Aula 09 */
+
+
+
 // todolist routes
 router.use('/', todolistRoutes);
 
 // aula-09-upload routes
-router.use('/aula-09', uploadRoutes);
+router.use('/', uploadRoutes);
 
 // Rota para executar a função promise01
 router.get('/promise', promise01);
