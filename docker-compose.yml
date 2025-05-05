@@ -1,0 +1,34 @@
+services:
+
+  node:
+    build:
+      context: .
+      dockerfile: docker/node22-web/Dockerfile.dev
+    environment:
+      - PORT=3000
+    expose:
+      - "${PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./public:/var/www/public
+      - ./aula-09/public:/var/www/aula-09/public
+    depends_on:
+      - node
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

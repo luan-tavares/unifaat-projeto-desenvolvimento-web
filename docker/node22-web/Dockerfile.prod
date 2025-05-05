@@ -1,0 +1,23 @@
+# Usa imagem oficial do Node 22 LTS para produção
+FROM node:22-slim
+
+# Cria diretório de trabalho
+WORKDIR /app
+
+# Copia apenas arquivos necessários para build
+COPY package*.json ./
+
+# Instala dependências em modo produção
+RUN npm ci --omit=dev
+
+# Copia o restante da aplicação
+COPY . .
+
+# Expõe a porta configurada (ajustável via ENV)
+EXPOSE 3000
+
+# Define a variável de ambiente de produção
+ENV NODE_ENV=production
+
+# Comando padrão para iniciar a aplicação
+CMD ["npm", "start"]
