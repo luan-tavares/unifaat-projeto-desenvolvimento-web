@@ -15,31 +15,7 @@ export default (function () {
 
             /** Insira o codigo aqui */
 
-            const storage = multer.diskStorage({
-                destination: (req, file, callback) => {
-                    callback(null, storageDir)
-                },
-                filename: (req, file, callback) => {
-                    const raw = Buffer.from(file.originalname, 'latin1')
-                    const fixedName = raw.toString('utf8')
-                    callback(null, fixedName)
-                }
-            })
 
-            const upload = multer({ storage }).single('file');
-
-            // Executa o middleware do multer aqui mesmo
-            upload(req, res, function (err) {
-                if (err) {
-                    return res.status(500).json({ erro: 'Erro ao fazer upload', detalhe: err.message })
-                }
-
-                if (!req.file) {
-                    return res.status(400).send('Nenhum arquivo enviado.')
-                }
-
-                res.status(200).send('Upload concluído!')
-            })
         },
 
         // Action para trazer os arquivos
@@ -47,19 +23,12 @@ export default (function () {
 
             /** Insira o codigo aqui */
 
-            fs.readdir(storageDir, (err, files) => {
-                if (err) {
-                    return res.status(500).json({ error: 'Erro ao listar arquivos.' });
+            res.json([
+                {
+                    name: "teste.txt",
+                    url: `/aula-09-public/storage/teste.txt`
                 }
-
-                const list = files.map(file => ({
-                    name: file,
-                    url: `/aula-09-public/storage/${encodeURIComponent(file)}`
-                }));
-
-                res.json(list);
-            });
-
+            ])
         }
 
     }
